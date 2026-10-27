@@ -1,0 +1,50 @@
+CRASHFLOCK VARIETY REBUILD QA REPORT
+Generated: 2026-10-26
+
+CAMPAIGN
+- Bird side: 200 levels
+- Pig side: 200 levels
+- Total: 400 levels
+- Boss cadence per 20-level story: levels 5, 10, 15, 20
+
+VARIETY CERTIFICATION
+- Campaign solvability certification: 400/400 PASS
+- Unique structure fingerprints: 400/400
+- Block systems used: 20/20
+- Layout families: 23
+- No duplicate structure fingerprints detected
+
+20 BLOCK SYSTEMS
+wood, thickwood, glass, reinforcedglass, stone, metal, rivetedmetal, ice, snow,
+sandstone, crystal, bone, rope, chain, honey, explosive, spring, fan, magnet, teleporter
+
+SPECIAL BEHAVIORS
+- Explosive: chain-reaction blast
+- Crystal: shatter blast
+- Spring: launches projectiles
+- Fan: local directional force
+- Magnet: local projectile attraction
+- Teleporter: paired projectile transport
+- Honey: sticky slowdown
+- Ice: high rebound
+- Snow: soft low rebound
+- Reinforced and heavy materials have distinct durability and impact response
+
+ART
+- Block/material art is sourced from image-generation output made for this rebuild.
+- Background removal was applied only to the block atlas because transparency is required for compositing blocks over level backgrounds.
+- Opaque environment artwork remains opaque.
+
+BROWSER QA
+- Chromium load/syntax pass completed without page-load JavaScript errors.
+- Five updated screenshots captured from the running build.
+- Responsive game canvas retained.
+
+CERTIFICATION CHECKS
+- Same launch origin, gravity and wind model as gameplay
+- Human-usable launch speed bound
+- Collision-clear certified trajectory to each required target/weak point
+- Required shot count <= available shots
+- Minimum target/weak-point size
+- Structural fingerprint uniqueness
+- All 20 block systems represented in campaign generation

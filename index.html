@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#202838">
+  <title>Crashflock</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icon-192.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app">
+    <header class="topbar">
+      <button id="homeBtn" class="brand" type="button" aria-label="Return to main menu">
+        <img src="icon-192.png" alt="" width="42" height="42">
+        <span>CRASHFLOCK</span>
+      </button>
+      <div class="wallet" aria-label="Player currencies">
+        <span>COINS <strong id="coinCount">0</strong></span>
+        <span>CAPSULES <strong id="capsuleCount">0</strong></span>
+      </div>
+      <button id="soundBtn" class="compact" type="button">SOUND ON</button>
+    </header>
+
+    <main>
+      <section id="homeScreen" class="screen active">
+        <div class="hero">
+          <div class="hero-copy">
+            <p class="eyebrow">SLINGSHOT DESTRUCTION CAMPAIGN</p>
+            <h1>Two sides. Four hundred campaign levels. Eighty bosses.</h1>
+            <p>Break twenty material systems, master character abilities, discover a new character every ten levels, survive multi-phase bosses, unlock infinite characters, and push into modes that do not end when the campaign does.</p>
+            <div class="hero-actions">
+              <button class="primary" data-action="campaign" data-side="bird" type="button">BIRD CAMPAIGN</button>
+              <button class="primary pig" data-action="campaign" data-side="pig" type="button">PIG CAMPAIGN</button>
+            </div>
+          </div>
+          <div class="hero-stat-grid" aria-label="Game features">
+            <article><strong>400</strong><span>CAMPAIGN LEVELS</span></article>
+            <article><strong>80</strong><span>BOSS FIGHTS</span></article>
+            <article><strong>42</strong><span>PLAYABLE CHARACTERS</span></article>
+            <article><strong>20</strong><span>BLOCK SYSTEMS</span></article>
+          </div>
+        </div>
+
+        <div class="mode-grid">
+          <button class="mode-card" data-action="endless" type="button"><b>ENDLESS RUN</b><span>Procedural stages, escalating modifiers, periodic bosses.</span></button>
+          <button class="mode-card" data-action="bossrush" type="button"><b>BOSS RUSH</b><span>Fight unlocked bosses back-to-back with a shared roster.</span></button>
+          <button class="mode-card" data-action="daily" type="button"><b>DAILY CHALLENGE</b><span>A deterministic challenge generated from the current date.</span></button>
+          <button class="mode-card" data-action="capsules" type="button"><b>CAPSULE LAB</b><span>Open earned capsules for character copies and coin jackpots.</span></button>
+          <button class="mode-card" data-action="roster" type="button"><b>ROSTER AND INFINITE</b><span>Inspect every character and buy permanent infinite use with coins.</span></button>
+          <button class="mode-card" data-action="qa" type="button"><b>LEVEL CERTIFICATION</b><span>See the built-in solvability test status for all 400 campaign levels.</span></button>
+        </div>
+      </section>
+
+      <section id="campaignScreen" class="screen">
+        <div class="section-head">
+          <div><p class="eyebrow" id="campaignEyebrow">CAMPAIGN</p><h2 id="campaignTitle">Bird Campaign</h2></div>
+          <button id="switchSideBtn" class="secondary" type="button">SWITCH SIDE</button>
+        </div>
+        <div id="storyGrid" class="story-grid"></div>
+        <div id="levelPanel" class="level-panel hidden">
+          <div class="section-head small"><div><p class="eyebrow" id="storyLabel"></p><h3 id="storyTitle"></h3></div><button id="closeLevelsBtn" class="secondary" type="button">CLOSE</button></div>
+          <p id="storyIntro" class="story-intro"></p>
+          <div id="levelGrid" class="level-grid"></div>
+        </div>
+      </section>
+
+      <section id="gameScreen" class="screen game-screen">
+        <div class="game-hud">
+          <div class="hud-left"><span id="hudMode">CAMPAIGN</span><strong id="hudTitle">LEVEL</strong></div>
+          <div class="hud-center"><span>SCORE <strong id="scoreText">0</strong></span><span>SHOTS <strong id="shotsText">0</strong></span></div>
+          <div class="hud-right"><button id="rosterBtn" class="secondary" type="button">CHARACTER</button><button id="restartBtn" class="secondary" type="button">RESTART</button><button id="quitBtn" class="secondary" type="button">QUIT</button></div>
+        </div>
+        <div class="canvas-wrap">
+          <canvas id="gameCanvas" width="1280" height="720" aria-label="Crashflock game field"></canvas>
+          <div id="canvasHint" class="canvas-hint">Drag the loaded character backward from the launcher, then release. Tap again in flight to use its ability.</div>
+          <div id="bossBar" class="boss-bar hidden"><span id="bossName">BOSS</span><div><i id="bossHealth"></i></div></div>
+        </div>
+        <div class="shot-tray">
+          <div><span>LOADED</span><strong id="loadedName">Rook</strong><small id="loadedAbility">Burst</small></div>
+          <div class="shot-dots" id="shotDots"></div>
+          <button id="abilityBtn" class="primary ability" type="button">USE ABILITY</button>
+        </div>
+      </section>
+
+      <section id="rosterScreen" class="screen">
+        <div class="section-head"><div><p class="eyebrow">CHARACTER COLLECTION</p><h2>Roster and Infinite Unlocks</h2></div><button id="rosterSideBtn" class="secondary" type="button">SHOW PIGS</button></div>
+        <p class="subcopy">Unlocked characters can be selected for levels. Finite copies are consumed when used. Buying INFINITE permanently removes that limit for the character.</p>
+        <div id="rosterGrid" class="roster-grid"></div>
+      </section>
+
+      <section id="capsuleScreen" class="screen">
+        <div class="lab-layout">
+          <div class="capsule-machine">
+            <div class="capsule-orb" id="capsuleOrb"><span>CAPSULE</span></div>
+            <button id="openCapsuleBtn" class="primary" type="button">OPEN ONE CAPSULE</button>
+            <p>Bosses, story clears, Endless milestones, and Daily Challenge clears award capsules.</p>
+          </div>
+          <div class="reward-log"><p class="eyebrow">RECENT REWARDS</p><h2>Capsule Lab</h2><div id="rewardLog"></div></div>
+        </div>
+      </section>
+
+      <section id="qaScreen" class="screen">
+        <div class="section-head"><div><p class="eyebrow">AUTOMATED LEVEL QA</p><h2>Campaign Certification</h2></div><button id="rerunQaBtn" class="primary" type="button">RUN TEST AGAIN</button></div>
+        <div class="qa-card"><strong id="qaBig">NOT RUN</strong><span id="qaDetail">The validator uses the same gravity, wind, launch origin, and fixed-step trajectory math as gameplay.</span><div class="meter"><i id="qaMeter"></i></div></div>
+        <div id="qaFailures" class="qa-failures"></div>
+      </section>
+    </main>
+
+    <div id="modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="modal-card">
+        <p id="modalKicker" class="eyebrow"></p>
+        <h2 id="modalTitle"></h2>
+        <div id="modalBody"></div>
+        <div id="modalActions" class="modal-actions"></div>
+      </div>
+    </div>
+
+    <div id="characterPicker" class="picker hidden" role="dialog" aria-modal="true" aria-label="Choose character">
+      <div class="picker-card"><div class="section-head small"><h3>Choose Character</h3><button id="closePickerBtn" class="secondary" type="button">CLOSE</button></div><div id="pickerGrid" class="picker-grid"></div></div>
+    </div>
+  </div>
+  <script src="content.js"></script>
+  <script src="levels.js"></script>
+  <script src="game.js"></script>
+</body>
+</html>
